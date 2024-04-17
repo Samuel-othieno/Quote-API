@@ -1,7 +1,7 @@
 import express from 'express'
 import { StatusCodes } from "http-status-codes";
 import morgan from 'morgan';
-import {updateAuthor,findAuthors,findUniqueAuthor, createNewAuthor,deleteAuthor, deleteUniqueAuthor} from './Controllers/authors.controller.js';
+import authorRouter from './Routes/authors.route.js';
 
 const App = express();
 
@@ -17,12 +17,16 @@ App.use(express.json())
 App.get('/', (req, res) => {
     res.status(StatusCodes.ACCEPTED).json({message: "Hello!, welcome to the Quote API!"});
 })
-App.get('/authors/find', findUniqueAuthor)
-App.put('/authors/update', updateAuthor)
-App.get('/authors/findall', findAuthors)
-App.post('/authors/create', createNewAuthor)
-App.delete('/authors/delete', deleteAuthor)
-App.delete('/authors/delete/unique', deleteUniqueAuthor)
+
+App.use('/quotes', authorRouter)
+
+
+// App.get('/authors/find', findUniqueAuthor)
+// App.put('/authors/update', updateAuthor)
+// App.get('/authors/findall', findAuthors)
+// App.post('/authors/create', createNewAuthor)
+// App.delete('/authors/delete', deleteAuthor)
+// App.delete('/authors/delete/unique', deleteUniqueAuthor)
 
 
 App.listen(PORT, (req, res) => {
