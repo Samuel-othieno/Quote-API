@@ -48,46 +48,47 @@
     -   Request Body:
     
     `JSON`
-        (```
-            {
-                "email": "john@example.com"
-            }
-        )
+        
+        {
+            "email": "john@example.com"
+        }
 
     -    Response Format:
-     `   JSON`
+     `JSON`
 
           
-        (```
-            {
-                "message": "SUCCESS! Author found",
-                "uniqueAuthorExits":
-                    {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "john@example.com"
-                    }
-            }
-        )
+        
+        {
+            "message": "SUCCESS! Author found",
+            "uniqueAuthorExits":
+                {
+                    "id": 1,
+                    "name": "John Doe",
+                    "email": "john@example.com"
+                }
+        }
 
 3. ## Create New Author
     - Endpoint: POST /authors/create
         * Description: Creates a new author.
         - Request Body:
             `JSON`
-            (```{
-                "name": "Jane Smith",
-                "email": "jane@example.com"
-            })
-        - Response Format:
-            `json`
+            (```
                 {
-                    "message": "SUCCESS! New Author added","newAuthor": 
-                        { 
-                            "id": 2,
-                            "name": "Jane Smith",             "email": "jane@example.com"
-                        }
+                    "name": "Jane Smith",
+                    "email": "jane@example.com"
                 }
+            )
+        - Response Format:
+`json`
+    
+{
+    "message": "SUCCESS! New Author added","newAuthor": 
+        { 
+            "id": 2,
+            "name": "Jane Smith",             "email": "jane@example.com"
+        }
+}
 
             
 4. ## Update Author Email
