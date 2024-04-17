@@ -55,7 +55,6 @@
 
     -    Response Format:
      `JSON`
-
           
         
         {
@@ -72,16 +71,19 @@
     - Endpoint: POST /authors/create
         * Description: Creates a new author.
         - Request Body:
-            `JSON`
-            (```
+ `JSON`
+
+
+
+            
                 {
                     "name": "Jane Smith",
                     "email": "jane@example.com"
                 }
-            )
+            
         - Response Format:
 `json`
-    
+
 {
     "message": "SUCCESS! New Author added","newAuthor": 
         { 
