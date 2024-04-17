@@ -55,16 +55,19 @@
         )
 
     -    Response Format:
-     `JSON`        
-    {
-        "message": "SUCCESS! Author found",
-        "uniqueAuthorExits":
-            {
-                "id": 1,
-                "name": "John Doe",
-                "email": "john@example.com"
-            }
-    }
+     `JSON`
+
+          
+        
+        {
+            "message": "SUCCESS! Author found",
+            "uniqueAuthorExits":
+                {
+                    "id": 1,
+                    "name": "John Doe",
+                    "email": "john@example.com"
+                }
+        }
 
 3. ## Create New Author
     - Endpoint: POST /authors/create
