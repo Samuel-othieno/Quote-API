@@ -1,7 +1,23 @@
 import { PrismaClient } from "@prisma/client";
 import { StatusCodes } from "http-status-codes";
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
+
+// async function authorLogin(req, res) {
+//   // const author = req.body;
+//   const authorData = {
+  
+//     authorName: "samuel ian",
+//     authorEmail: "authormail@gmail.com",
+//   };
+//   try {
+//     let token = jwt.sign(authorData, "samuel_douglas_othieno", { expiresIn: "7h" });
+//     res.status(StatusCodes.OK).json({ token });
+//   } catch (error) {
+//     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: "Operation Failure! Please try again."});
+//   }
+// }
 
 async function findUniqueAuthor(req, res) {
   const uniqueEmail = req.body.email;
@@ -92,11 +108,15 @@ async function updateAuthor(req, res) {
 
   try {
     if (!newEmail) {
-      res.status(StatusCodes.BAD_REQUEST).json({ message: "New email required" });
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "New email required" });
     }
 
     if (!uniqueEmail) {
-      res.status(StatusCodes.BAD_REQUEST).json({ message: "Unique email required" });
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Unique email required" });
     }
 
     if (newEmail === uniqueEmail) {
@@ -107,22 +127,23 @@ async function updateAuthor(req, res) {
 
     const existingAuthor = await prisma.author.findUnique({
       where: {
-        email: newEmail
-      }
-    })
+        email: newEmail,
+      },
+    });
     const noExistingAuthor = await prisma.author.findUnique({
       where: {
-        email: uniqueEmail
-      }
-    })
+        email: uniqueEmail,
+      },
+    });
 
-
-    if(!noExistingAuthor){
-      res.status(StatusCodes.BAD_REQUEST).json({message: 'Author not found'})
+    if (!noExistingAuthor) {
+      res.status(StatusCodes.BAD_REQUEST).json({ message: "Author not found" });
     }
 
     if (existingAuthor) {
-      res.status(StatusCodes.BAD_REQUEST).json({message: 'Email already exists'})
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Email already exists" });
     } else {
       const author = await prisma.author.update({
         where: {
@@ -132,16 +153,16 @@ async function updateAuthor(req, res) {
           email: newEmail,
         },
       });
-        res.status(StatusCodes.ACCEPTED).json({message: "SUCCESS! Author updated", author});
+      res
+        .status(StatusCodes.ACCEPTED)
+        .json({ message: "SUCCESS! Author updated", author });
     }
-
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: "Operation failed" });
   }
 }
-
 
 async function deleteUniqueAuthor(req, res) {
   const authorEmail = req.body.email;
@@ -180,4 +201,5 @@ export {
   createNewAuthor,
   deleteAuthor,
   deleteUniqueAuthor,
+  authorLogin,
 };
