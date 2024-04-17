@@ -13,7 +13,7 @@
    - Update the database connection details in `prisma/schema.prisma`
 4. Environment Variables:
    - Create a `.env` file in the root directory and set the following environment variables:
-     `DATABASE_URL="postgresql://postgres:@douglas1799@localhost:5432/my_quote_api?schema=public"`
+     `DATABASE_URL="postgresql://postgres:password@localhost:5432/my_quote_api?schema=public"`
 5. Run Migrations:
    - Run `npx prisma migrate dev` to apply database migrations.
 6. Start the Server:
@@ -22,15 +22,112 @@
 
 # Endpoints
 
-1. Get All Authors \* Endpoint: GET /authors/findall - Description: Retrieves a list of all authors. >Response Format:
-   ({
-  "message": "SUCCESS! Authors found",
-  "author": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com"
-    },
-    // Other authors...
-  ]
-})
+1. ## Get All Authors 
+    -   Endpoint: `GET /authors/findall`
+           * Description: Retrieves a list of all authors.
+    -           Response Format: 
+    
+    `json`
+        (```{
+                "message": "SUCCESS! Authors found",
+                "authors": 
+                    [
+                        {
+                            "id": 1,
+                            "name": "Samuel Douglas Othieno",
+                            "email": "douglasothieno@gmail.com"
+                        },
+                        // Other authors...
+                    ] 
+            }
+        )
+
+2. ## Get Author by Email
+    - Endpoint: GET /authors/find
+        * Description: Retrieves an author by their unique email address.
+    -   Request Body:
+    
+    `JSON`
+        (```
+            {
+                "email": "john@example.com"
+            }
+        )
+
+    -    Response Format:
+     `   JSON`
+
+          
+        (```
+            {
+                "message": "SUCCESS! Author found",
+                "uniqueAuthorExits":
+                    {
+                        "id": 1,
+                        "name": "John Doe",
+                        "email": "john@example.com"
+                    }
+            }
+        )
+
+3. ## Create New Author
+    - Endpoint: POST /authors/create
+        * Description: Creates a new author.
+        - Request Body:
+            `JSON`
+            (```{
+                "name": "Jane Smith",
+                "email": "jane@example.com"
+            })
+        - Response Format:
+            `json`
+                {
+                    "message": "SUCCESS! New Author added","newAuthor": 
+                        { 
+                            "id": 2,
+                            "name": "Jane Smith",             "email": "jane@example.com"
+                        }
+                }
+
+            
+4. ## Update Author Email
+    - Endpoint: PUT /authors/update
+        * Description: Updates an author’s email address.
+        - Request Body:
+            `JSON`
+                {
+                    "uniqueEmail": "john@example.com",
+                    "newEmail": "john.smith@example.com"
+                }             
+
+        - Response Format:
+            `JSON`
+                {
+                    "message": "SUCCESS! Author updated", "author": 
+                        {
+                            "id": 1,
+                            "name": "John Doe",
+                            "email": "john.smith@example.com"
+                        }
+                }
+
+5. ## Delete All Authors
+    - Endpoint: DELETE /authors/delete
+        * Description: Deletes all authors.
+        - Response Format:
+            `JSON`
+                {
+                    "message": "SUCCESS! Authors deleted"
+                }
+
+
+
+
+
+
+
+
+
+
+
+
