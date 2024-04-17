@@ -55,10 +55,10 @@
         )
 
     -    Response Format:
-     `   JSON`
+     `JSON`
 
           
-        (```
+        (
             {
                 "message": "SUCCESS! Author found",
                 "uniqueAuthorExits":
@@ -75,10 +75,12 @@
         * Description: Creates a new author.
         - Request Body:
             `JSON`
-            (```{
-                "name": "Jane Smith",
-                "email": "jane@example.com"
-            })
+            (```
+                {
+                    "name": "Jane Smith",
+                    "email": "jane@example.com"
+                }
+            )
         - Response Format:
             `json`
                 {
