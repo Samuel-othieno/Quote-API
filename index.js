@@ -7,8 +7,6 @@ import helmet from 'helmet';
 
 const App = express();
 
-const PORT = 5000;
-
 //Middleware
 App.use(morgan('dev'))
 App.use(express.json())
@@ -23,6 +21,4 @@ App.get('/', (req, res) => {
 
 App.use('/quotes', authorRouter)
 
-App.listen(PORT, (req, res) => {
-    console.log(`Server running on http://localhost:${PORT}`)
-})
+export default App;
