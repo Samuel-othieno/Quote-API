@@ -4,20 +4,20 @@ import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
-// async function authorLogin(req, res) {
-//   // const author = req.body;
-//   const authorData = {
+async function authorLogin(req, res) {
+  // const author = req.body;
+  const authorData = {
   
-//     authorName: "samuel ian",
-//     authorEmail: "authormail@gmail.com",
-//   };
-//   try {
-//     let token = jwt.sign(authorData, "samuel_douglas_othieno", { expiresIn: "7h" });
-//     res.status(StatusCodes.OK).json({ token });
-//   } catch (error) {
-//     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: "Operation Failure! Please try again."});
-//   }
-// }
+    authorName: "samuel ian",
+    authorEmail: "authormail@gmail.com",
+  };
+  try {
+    let token = jwt.sign(authorData, "samuel_douglas_othieno", { expiresIn: "7h" });
+    res.status(StatusCodes.OK).json({ token });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: "Operation Failure! Please try again."});
+  }
+}
 
 async function findUniqueAuthor(req, res) {
   const uniqueEmail = req.body.email;
