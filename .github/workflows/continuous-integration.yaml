@@ -1,10 +1,40 @@
-name: contibuous-Integration
-on: 
+name: Contibuous-Integrationon
+
+on:
     pull_request:
         branches: [main]
-
+        
+env:
+    DATABASE_URL: postgresql://postgres:@douglas1799@localhost:5432/QuoteAPI?schema=public
+    
 jobs:
     testing-api:
         runs-on: ubuntu-latest
-
-    steps:
+        
+        services:
+            postgres:
+                image: postgres:14-alpine
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: @douglas1799
+                    POSTGRES_DB: QuoteAPI
+                ports:
+                    - 5432: 5432
+                    
+                    
+        steps:
+            -name: checkout code into the runner
+            uses: actions/checkout@v4
+                
+            -name: setup nodejs on the runner
+            uses: actions/setup-node@v4
+            with: node-version:18
+                
+            -name: Install npm packages
+            run: npm ci
+            
+            -name: Run Migration files against Database 
+            run: npx prisma migrate dev
+            
+            -name: run the integration tests 
+            run: npm test
